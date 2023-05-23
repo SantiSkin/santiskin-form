@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="styles.css">
+<title>Landing Page Form</title>
+</head>
+<body>
+    <div class="contact">
+        <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3185.3236725925044!2d-7.940701999999992!3d37.02592820000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0553015337b105%3A0xaf8fc902367418d6!2sSanticlinic%20-%20Medicina%20Est%C3%A9tica!5e0!3m2!1spt-PT!2spt!4v1684460420841!5m2!1spt-PT!2spt" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>           
+        </div>
+        <div class="form"> 
+            <h1>SantiClinic</h1>
+            <form action="" name="contact-us">
+                <input type="text" name="name" required placeholder="Nome/Name">
+                <input type="email" name="email" required placeholder="Email">
+                <input type="number" name="number" required placeholder="Telefone/Phone No">
+                <textarea name="message" placeholder="Mensagem/Message"></textarea>
+                <input type="hidden" name="_cc" value="another@email.com,yetanother@email.com">
+                <input type="hidden" name="_template" value="table">
+                <button type="submit">Enviar/Submit</button>
+                <div class="privacy-policy">
+                    By submitting this form, you agree to the terms and conditions <a href="privacy_policy.pdf" target="_blank">Privacy Policy</a>.
+                </div>
+            </form>
+        </div> 
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxo8YcLLH1CmJ1-IkSotwpw-J5m5qpMulztgi8aQb_Z9Zz5BjdrvoXP3IO9-5ai4QFN/exec'
+        const form = document.forms['contact-us']
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                form.reset()
+                alert('Obrigado/Thank you!')
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+    </script>
+    
+</body>
+</html>
