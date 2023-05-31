@@ -27,19 +27,46 @@
     </div>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxo8YcLLH1CmJ1-IkSotwpw-J5m5qpMulztgi8aQb_Z9Zz5BjdrvoXP3IO9-5ai4QFN/exec'
-        const form = document.forms['contact-us']
-      
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxo8YcLLH1CmJ1-IkSotwpw-J5m5qpMulztgi8aQb_Z9Zz5BjdrvoXP3IO9-5ai4QFN/exec';
+        const form = document.forms['contact-us'];
+    
         form.addEventListener('submit', e => {
-          e.preventDefault()
-          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(response => {
-                form.reset()
-                alert('Obrigado/Thank you!')
-            })
-            .catch(error => console.error('Error!', error.message))
-        })
+            e.preventDefault();
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => {
+                    form.reset();
+                    displayThankYouMessage();
+                })
+                .catch(error => console.error('Error!', error.message));
+        });
+    
+        function displayThankYouMessage() {
+            const thankYouContainer = document.createElement('div');
+            thankYouContainer.classList.add('thank-you-container');
+        
+            const thankYouMessage = document.createElement('h2');
+            thankYouMessage.classList.add('thank-you-message');
+            thankYouMessage.innerText = 'Thank you!';
+        
+            const description = document.createElement('p');
+            description.innerText = 'Your message has been successfully submitted.';
+        
+            const closeButton = document.createElement('button');
+            closeButton.classList.add('close-button');
+            closeButton.innerText = 'Close';
+            closeButton.addEventListener('click', () => {
+                thankYouContainer.remove();
+            });
+        
+            thankYouContainer.appendChild(thankYouMessage);
+            thankYouContainer.appendChild(description);
+            thankYouContainer.appendChild(closeButton);
+        
+            document.body.appendChild(thankYouContainer);
+        }
+        
     </script>
+    
     
 </body>
 </html>
